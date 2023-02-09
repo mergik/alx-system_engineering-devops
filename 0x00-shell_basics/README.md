@@ -6,7 +6,7 @@
 5-listfilesdigitonly - Display current directory contents in long format, with user and group IDs displayed numerically and hidden files
 6-firstdirectory - a script that creates a directory named my_first_directory in the /tmp/ directory
 7-movethatfile - script that moves the file betty from /tmp/ to /tmp/my_first_directory
-8
-9
+8-firstdelete - Delete the file betty in /tmp/my_first_directory
+9-firstdirdeletion - Delete the directory my_first_directory in the /tmp directory
 10-back - a script that changes the working directory to the previous one
 11-lists - a script that lists all hidden files in the current, parent, and the /boot directory (in this order), in long format
