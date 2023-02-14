@@ -1,2 +1,2 @@
 #!/bin/bash
-cut -f5 -f6 -d: /etc/passwd | sort
+cut -d ":" -f 5,6 /etc/passwd | sort
