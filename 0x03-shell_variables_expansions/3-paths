@@ -1,2 +1,2 @@
 #!/bin/bash
-echo /path | wc -w
+cut -d : -f 1 $PATH | wc -w
