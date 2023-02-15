@@ -1,2 +1,2 @@
 #!/bin/bash
-knowledge=$((128 + $TRUEKNOWLEDGE)) | echo " $knowledge"
+knowledge=$((128 + $TRUEKNOWLEDGE)) | printf "$knowledge\n"
