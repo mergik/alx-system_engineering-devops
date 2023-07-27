@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# This script displays numbers from 1 to 100 with Fizz, Buzz, and FizzBuzz based on certain conditions.
+
+for ((number=1; number<=100; number++)); do
+  # Check for multiples of both 3 and 5 (FizzBuzz)
+  if ((number % 3 == 0 && number % 5 == 0)); then
+    echo "FizzBuzz"
+  # Check for multiples of 3 (Fizz)
+  elif ((number % 3 == 0)); then
+    echo "Fizz"
+  # Check for multiples of 5 (Buzz)
+  elif ((number % 5 == 0)); then
+    echo "Buzz"
+  # For other numbers, simply display the number
+  else
+    echo $number
+  fi
+done
