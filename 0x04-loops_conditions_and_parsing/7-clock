@@ -1,23 +1,17 @@
 #!/usr/bin/env bash
-# This script displays numbers from 1 to 20 and specific messages for certain loop iterations using the case statement.
+# This script displays the time for 12 hours and 59 minutes using a while loop.
 
-count=1
+# Display hours from 0 to 12
+hour=0
+while [ $hour -le 12 ]; do
+  echo "Hour: $hour"
 
-while [ $count -le 20 ]; do
-  case $count in
-    4)
-      echo "4 and then bad luck from China"
-      ;;
-    9)
-      echo "9 and then bad luck from Japan"
-      ;;
-    17)
-      echo "17 and then bad luck from Italy"
-      ;;
-    *)
-      echo $count
-      ;;
-  esac
+  # Display minutes from 1 to 59
+  minute=1
+  while [ $minute -le 59 ]; do
+    echo $minute
+    ((minute++))
+  done
 
-  ((count++))
+  ((hour++))
 done
