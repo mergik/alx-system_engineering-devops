@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# This script creates a PID file, displays messages, and handles signals.
+
+pid_file="/var/run/myscript.pid"
+
+function handle_sigterm() {
+    echo "I hate the kill command"
+}
+
+function handle_sigint() {
+    echo "Y U no love me?!"
+}
+
+function handle_sigquit() {
+    rm -f "$pid_file"
+    echo "I hate the kill command"
+    exit 0
+}
+
+trap 'handle_sigterm' SIGTERM
+trap 'handle_sigint' SIGINT
+trap 'handle_sigquit' SIGQUIT SIGTERM
+
+# Save the PID of the script to a file
+echo $$ > "$pid_file"
+
+while true; do
+    echo "To infinity and beyond"
+    sleep 2
+done
