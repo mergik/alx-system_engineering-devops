@@ -9,4 +9,5 @@ if [ -z "$process_pid" ]; then
 else
   # Terminate the process using the kill command
   kill "$process_pid"
+  echo "Terminated"
 fi
