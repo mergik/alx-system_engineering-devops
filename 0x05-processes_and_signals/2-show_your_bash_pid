@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This script displays lines containing the word "bash" to find the PID of the Bash process.
+# shellcheck disable=SC2009
+
+# Get a list of all processes and their hierarchy using the `ps` command.
+process_list=$(ps axo pid,ppid,user,%cpu,%mem,vsz,rss,tty,stat,start,time,comm --forest)
+
+# Display only the lines containing the word "bash."
+echo "$process_list" | grep bash
