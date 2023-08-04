@@ -6,5 +6,5 @@ ip_list=$(ip -4 addr | grep inet | awk '{print $2}' | cut -d '/' -f 1)
 
 # Loop through the list and display each IP address
 for ip in $ip_list; do
-    echo $ip
+    echo "$ip"
 done
