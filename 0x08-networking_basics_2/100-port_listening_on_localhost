@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This script starts a simple TCP server on port 98 and listens for incoming connections.
+
+# Listen on port 98 using netcat (nc)
+nc -l -p 98 -k
