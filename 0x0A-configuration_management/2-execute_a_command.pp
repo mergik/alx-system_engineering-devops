@@ -1,6 +1,8 @@
-# Kill a process named "killmenow" using pkill
+# Kill a process named killmenow
 exec { 'killmenow':
-  command => 'pkill -f killmenow',
-  onlyif  => 'pgrep -f killmenow',
+  command     => 'pkill -f killmenow',
+  path        => '/usr/bin:/bin',
+  logoutput   => true,
+  refreshonly => true,
 }
 
