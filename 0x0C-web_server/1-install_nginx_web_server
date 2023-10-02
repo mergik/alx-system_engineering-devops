@@ -1,35 +1,15 @@
 #!/usr/bin/env bash
 # Configure Nginx to return "Hello World!" on root GET request
 
-# Install Nginx
+# Install nginx
 apt-get update
 apt-get install -y nginx
 
-# Create a custom Nginx configuration file
-echo 'server {
-    listen 80;
-    server_name localhost;
+# Configure nginx to listen on port 80
+sed -i 's/80 default_server;/80;/g' /etc/nginx/sites-available/default
 
-    location / {
-        root /var/www/html;
-        index index.html;
-    }
+# Create a custom index.html file with "Hello World!"
+echo "Hello World!" > /var/www/html/index.html
 
-    location = / {
-        return 200 "Hello World!";
-    }
-
-    location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
-        expires max;
-        log_not_found off;
-    }
-}' > /etc/nginx/sites-available/custom
-
-# Create a symbolic link to enable the custom configuration
-ln -s /etc/nginx/sites-available/custom /etc/nginx/sites-enabled/
-
-# Remove the default Nginx configuration
-rm -f /etc/nginx/sites-enabled/default
-
-# Test Nginx configuration and restart Nginx
-nginx -t && nginx -s reload
+# Restart nginx without using systemctl
+/etc/init.d/nginx restart
