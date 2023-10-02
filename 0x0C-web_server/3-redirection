@@ -1,39 +1,36 @@
 #!/usr/bin/env bash
-# Configure Nginx to perform a 301 redirect from /redirect_me to another page
+# This script installs Nginx and configures a 301 redirect
+
+# Update the package lists for upgrades and new package installations
+apt-get update
 
 # Install Nginx
-apt-get update
 apt-get install -y nginx
 
-# Create a custom Nginx configuration file for the redirection
+# Start Nginx
+service nginx start
+
+# Create a configuration file for the redirect
 echo 'server {
     listen 80;
     server_name localhost;
-
-    location / {
-        root /var/www/html;
-        index index.html;
+    location = /redirect_me {
+        return 301 https://www.google.com;
     }
+}' | tee /etc/nginx/sites-available/redirect
 
-    location = / {
-        return 200 "Hello World!";
-    }
+# Remove the existing symbolic link if it exists
+if [ -e /etc/nginx/sites-enabled/redirect ]; then
+    rm /etc/nginx/sites-enabled/redirect
+fi
 
-    location /redirect_me {
-        return 301 https://youtu.be/dQw4w9WgXcQ;
-    }
+# Create a new symbolic link
+ln -s /etc/nginx/sites-available/redirect /etc/nginx/sites-enabled/
 
-    location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
-        expires max;
-        log_not_found off;
-    }
-}' > /etc/nginx/sites-available/custom
+# Remove the default configuration if it exists
+if [ -e /etc/nginx/sites-enabled/default ]; then
+    rm /etc/nginx/sites-enabled/default
+fi
 
-# Create a symbolic link to enable the custom configuration
-ln -s /etc/nginx/sites-available/custom /etc/nginx/sites-enabled/
-
-# Remove the default Nginx configuration
-rm -f /etc/nginx/sites-enabled/default
-
-# Test Nginx configuration and reload Nginx
-nginx -t && nginx -s reload
+# Restart Nginx to apply the changes
+/etc/init.d/nginx restart
